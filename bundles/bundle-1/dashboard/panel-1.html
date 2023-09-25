@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script type="module" src="./panel-1.js"></script>
+		<meta charset="UTF-8" />
+		<style>
+			.monospace {
+				font-family: monospace;
+			}
+
+			.teamselect{
+				width: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="root">
+			<h1>team</h1>
+			<h2>Red</h2>
+			<select name="red team" id="red" class="teamselect"></select>
+			<h2>Blue</h2>
+			<select name="blue team" id="blue" class="teamselect"></select>
+			<input type="button" value="Update" onclick="UpdateTeam()"></input>
+
+			<script>
+				const teams = nodecg.bundleConfig.teams
+				function UpdateTeam(){
+					const red = document.getElementById("red");
+					const rednum = red.selectedIndex;
+					const redname = red.options[rednum].value;
+					const blue = document.getElementById("blue");
+					const bluenum = blue.selectedIndex;
+					const bluename = blue.options[bluenum].value;
+
+					let redteam = null
+					let blueteam = null
+					for (const i in teams){
+						if (teams[i].name == redname) redteam = teams[i]
+						if (teams[i].name == bluename) blueteam = teams[i]
+						if (redteam != null && blueteam != null) break
+					}
+
+					const RedRep = nodecg.Replicant('redteam');
+					RedRep.value = redteam;
+					const BlueRep = nodecg.Replicant('blueteam');
+					BlueRep.value = blueteam;
+				}
+			</script>
+		</div>
+		
+	</body>
+</html>

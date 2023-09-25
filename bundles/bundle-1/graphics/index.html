@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<style>
+			body {
+				font-family: sans-serif;
+			}
+
+			.monospace {
+				font-family: monospace;
+			}
+
+			.upperbanner {
+				position: absolute;
+				display: flex;
+				width: 100vw;
+				top: 0;
+
+				.red{
+					display: flex;
+					width: 50%;
+					right: 50%;
+					text-align: right;
+				}
+				.blue{
+					display: flex;
+					width: 50%;
+					left: 50%;
+					text-align: left;
+				}
+			}
+		</style>
+		<script type="module" src="./index.js"></script>
+	</head>
+	<body>
+		<div class="upperbanner">
+			<div class="red">
+				<h1 id="redteam"></h1>
+				<h1 id="redscore">0</h1>
+			</div>
+			<div class="blue">
+				<h1 id="bluescore">0</h1>
+				<h1 id="blueteam"></h1>
+			</div>
+		</div>
+		<div class="redmember">
+			<h2 id="rp1"></h2>
+			<h2 id="rp2"></h2>
+			<h2 id="rp3"></h2>
+			<h2 id="rp4"></h2>
+		</div>
+		<div class="bluemember">
+			<h2 id="bp1"></h2>
+			<h2 id="bp2"></h2>
+			<h2 id="bp3"></h2>
+			<h2 id="bp4"></h2>
+		</div>
+		<div class="lowerbanner">
+			<h3 id="m1"></h3>
+			<h3 id="m2"></h3>
+			<h3 id="m3"></h3>
+		</div>
+	</body>
+	<script>
+		nodecg.Replicant('redteam').on('change', (newVal) => {
+			document.getElementById("redteam").innerText = newVal.name
+			document.getElementById("rp1").innerText = newVal.p1
+			document.getElementById("rp2").innerText = newVal.p2
+			document.getElementById("rp3").innerText = newVal.p3
+			document.getElementById("rp4").innerText = newVal.p4
+		})
+
+		nodecg.Replicant('blueteam').on('change', (newVal) => {
+			document.getElementById("blueteam").innerText = newVal.name
+			document.getElementById("bp1").innerText = newVal.p1
+			document.getElementById("bp2").innerText = newVal.p2
+			document.getElementById("bp3").innerText = newVal.p3
+			document.getElementById("bp4").innerText = newVal.p4
+		})
+	</script>
+</html>
