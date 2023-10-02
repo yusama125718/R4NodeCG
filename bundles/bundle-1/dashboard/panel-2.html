@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="./panel-2.css">
+		<script type="module" src="./panel-2.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<h1>teams</h1>
+			<select name="teams" id="teams" class="teamselect">
+                <option value="none">none</option>
+            </select>
+            <input type="button" value="Edit" onclick="SelectTeam()"></input>
+            <form name="TeamEdit" id="editor" class="teameditor"></form>
+		</div>
+		
+	</body>
+    <script>
+        const teams = nodecg.bundleConfig.teams
+        function SelectTeam(){
+            const select = document.getElementById("teams")
+            const index = select.selectedIndex;
+            const value = select.options[index].value;
+
+            if (value == "none"){
+                alert("you selected none!")
+                return
+            }
+
+            let team = null
+            for (const i in teams){
+                if (teams[i].name == value) {
+                    team = teams[i]
+                    break
+                }
+            }
+
+            const form = document.getElementById("editor")
+            form.appendChild(document.createTextNode("TeamName"))
+
+            const name = document.createElement("input")
+            name.type = "text"
+            name.value = team.name
+            form.appendChild(name)
+            form.appendChild(document.createElement("br"))
+            
+            var count = 0
+            for (const i in team){
+                count = count + 1
+                form.appendChild(document.createTextNode("Player" + count))
+                const player = document.createElement("input")
+                player.type = "text"
+                player.value = team.players[i].name
+                form.appendChild(player)
+                form.appendChild(document.createElement("br"))
+            }
+        }
+    </script>
+</html>

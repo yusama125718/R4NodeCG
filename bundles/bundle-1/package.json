@@ -27,6 +27,13 @@
         "width": 4,
         "file": "panel-1.html",
         "headerColor": "#525F78"
+      },
+      {
+        "name": "panel-2",
+        "title": "TeamEdit",
+        "width": 4,
+        "file": "panel-2.html",
+        "headerColor": "#525F78"
       }
     ],
     "graphics": [

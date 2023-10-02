@@ -1,0 +1,163 @@
+body {
+    font-family: sans-serif;
+}
+
+.monospace {
+    font-family: monospace;
+}
+
+.upperbanner {
+    position: relative;
+    display: flex;
+    width: 100vw;
+    top: 0;
+
+    .red{
+        display: flex;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 30vW;
+        text-align: right;
+        margin-left: 20vw;
+        color: white;
+
+        .team{
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, darkslategray 0%, darkslategray 65%, rgba(255, 0, 0, 0) 65%, rgba(255, 0, 0, 0) 100%);
+            display: inline-block;
+            margin: 0 0 0 0;
+
+            .name{
+                font-size: 50px;
+                margin: 5px 5px 0 0;
+                right: 0;
+            }
+        }
+
+        .team::after{
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 100%;
+            border-top: 38px solid darkslategray;  
+            border-left: 20px solid transparent; 
+            border-right: 20px solid darkslategray;  
+            border-bottom: 38px solid transparent;  
+        }
+
+        .score{
+            display: inline-block;
+            background-color: red;
+
+            .num{
+                font-size: 80px;
+                margin: 0 20px 0 20px;
+            }
+        }
+    }
+    .blue{
+        display: flex;
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 30vW;
+        text-align: left;
+        margin-right: 20vw;
+        color: white;
+
+        .team{
+            background: linear-gradient(to bottom, darkslategray 0%, darkslategray 65%, rgba(255, 0, 0, 0) 65%, rgba(255, 0, 0, 0) 100%);
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+            margin: 0 0 0 0;
+
+            .name{
+                font-size: 50px;
+                left: 0;
+                margin: 5px 0 0 5px;
+            }
+        }
+
+        .team::after{
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            border-top: 38px solid darkslategray;  
+            border-left: 20px solid darkslategray; 
+            border-right: 20px solid transparent;  
+            border-bottom: 38px solid transparent;  
+        }
+
+        .score{
+            display: inline-block;
+            background-color: blue;
+            
+            .num{
+                font-size: 80px;
+                margin: 0 20px 0 20px;
+            }
+        }
+    }
+}
+
+.members{
+    display: flex;
+    line-height: 20px;
+    width: 100vw;
+
+    .redmember{
+        position: fixed;
+        width: 20vw;
+        text-align: left;
+        left: 0;
+        z-index: 2;
+
+        .text{
+            line-height: 13px;
+            margin-left: 10px;
+        }
+    }
+
+    .redmember::after{
+        content: "";
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height:100%;
+        top: 0;
+        left: 0;
+        background-color: red;
+        opacity: 0.3;
+      }
+
+    .bluemember{
+        margin-right: 10px;
+        position: fixed;
+        width: 20vw;
+        text-align: right;
+        right: 0;
+
+        .text{
+            line-height: 13px;
+            margin-right: 10px;
+        }
+    }
+
+    .bluemember::after{
+        content: "";
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height:100%;
+        top: 0;
+        left: 0;
+        background-color: blue;
+        opacity: 0.3;
+      }
+}
