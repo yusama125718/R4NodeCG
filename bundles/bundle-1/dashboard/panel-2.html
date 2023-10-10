@@ -17,7 +17,53 @@
 		
 	</body>
     <script>
-        const teams = nodecg.bundleConfig.teams
+        const api_url = nodecg.bundleConfig.api; //生成したAPIのURLを指定
+        
+        const teams = []
+        let team = null
+
+        fetch(api_url)
+        .then(function (fetch_data) {
+            return fetch_data.json()
+        })
+        .then(function (json) {
+            for (const i in json) {
+                if (json[i] == null) continue;
+                teams.push(json[i])
+            }
+        })
+
+        const SaveData = function(){
+            const input = document.getElementsByTagName("input")
+
+            const data = team
+            data.players = []
+
+            for (const i in input){
+                if (input[i].type == "button") continue
+                if (input[i].id == "teamname") data.name = input[i].value
+                else if (input[i].value !== undefined && input[i].value != "") data.players.push(input[i].value)
+            }
+            for (const i in teams){
+                if (teams[i] == team) {
+                    teams[i] = data
+                    team = data
+
+                    fetch(api_url, {
+                        method: "POST", 
+                        mode: "no-cors",       
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(teams),
+                    })
+                    .then(function (fetch_data) {
+                        alert("Send Data")
+                    })
+                }
+            }
+        }
+
         function SelectTeam(){
             const select = document.getElementById("teams")
             const index = select.selectedIndex;
@@ -27,8 +73,7 @@
                 alert("you selected none!")
                 return
             }
-
-            let team = null
+            
             for (const i in teams){
                 if (teams[i].name == value) {
                     team = teams[i]
@@ -36,25 +81,39 @@
                 }
             }
 
+            const editor = document.getElementById("editor")
+            while (editor.firstChild) editor.removeChild(editor.firstChild);
+
             const form = document.getElementById("editor")
-            form.appendChild(document.createTextNode("TeamName"))
+            const p1 = document.createElement("p")
+            p1.textContent = "TeamName"
+            form.appendChild(p1)
 
             const name = document.createElement("input")
             name.type = "text"
+            name.id = "teamname"
             name.value = team.name
             form.appendChild(name)
-            form.appendChild(document.createElement("br"))
             
             var count = 0
-            for (const i in team){
-                count = count + 1
-                form.appendChild(document.createTextNode("Player" + count))
+            for (const i in team.players){
+                if (team.players[count] == "") continue
+                const p = document.createElement("p")
+                p.textContent = "Player" + (count + 1)
+                form.appendChild(p)
                 const player = document.createElement("input")
                 player.type = "text"
-                player.value = team.players[i].name
+                player.value = team.players[count]
+                player.id = "p" + count
                 form.appendChild(player)
-                form.appendChild(document.createElement("br"))
+                count = count + 1
             }
+
+            const button = document.createElement("input")
+            button.type = "button"
+            button.value = "save"
+            button.addEventListener("click", SaveData)
+            form.appendChild(button)
         }
     </script>
 </html>
