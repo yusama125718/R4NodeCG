@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" href="./panel-2.css">
-		<script type="module" src="./panel-2.js"></script>
 	</head>
 	<body>
 		<div id="root">
@@ -32,6 +31,7 @@
                 teams.push(json[i])
             }
         })
+        .then(function(){addteams()})
 
         const SaveData = function(){
             const input = document.getElementsByTagName("input")
@@ -114,6 +114,17 @@
             button.value = "save"
             button.addEventListener("click", SaveData)
             form.appendChild(button)
+        }
+
+        function addteams(){
+            for(const i in teams) {
+                if (i == null) continue
+                const red = document.getElementById("teams")
+                const roption = document.createElement("option")
+                roption.text = teams[i].name;
+                roption.value = teams[i].name;
+                red.add(roption);
+            }
         }
     </script>
 </html>

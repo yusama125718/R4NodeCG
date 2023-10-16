@@ -24,15 +24,43 @@
       {
         "name": "panel-1",
         "title": "TeamSettings",
-        "width": 4,
+        "width": 3,
         "file": "panel-1.html",
         "headerColor": "#525F78"
       },
       {
         "name": "panel-2",
         "title": "TeamEdit",
-        "width": 4,
+        "width": 3,
         "file": "panel-2.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "panel-3",
+        "title": "MapEdit",
+        "width": 3,
+        "file": "panel-3.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "panel-4",
+        "title": "ScoreEdit",
+        "width": 3,
+        "file": "panel-4.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "panel-5",
+        "title": "RedAbilityEdit",
+        "width": 3,
+        "file": "panel-5.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "panel-6",
+        "title": "BlueAbilityEdit",
+        "width": 3,
+        "file": "panel-6.html",
         "headerColor": "#525F78"
       }
     ],

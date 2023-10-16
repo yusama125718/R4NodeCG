@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" href="./panel-1.css">
-		<script type="module" src="./panel-1.js"></script>
 	</head>
 	<body>
 		<div id="root">
@@ -15,7 +14,7 @@
 			<input type="button" value="Update" onclick="UpdateTeam()"></input>
 
 			<script>
-				var api_url = nodecg.bundleConfig.api; //生成したAPIのURLを指定
+				const api_url = nodecg.bundleConfig.api; //生成したAPIのURLを指定
  
 				const teams = []
 				fetch(api_url)
@@ -28,6 +27,7 @@
 						teams.push(json[i])
 					}
 				})
+				.then(function(){addteams()})
 
 				function UpdateTeam(){
 					const red = document.getElementById("red");
@@ -51,6 +51,21 @@
 					BlueRep.value = blueteam;
 
 					alert("confirm update!")
+				}
+
+				function addteams(){
+					for(const i in teams) {
+						const red = document.getElementById("red");
+						const blue = document.getElementById("blue");
+						const roption = document.createElement("option");
+						roption.text = teams[i].name;
+						roption.value = teams[i].name;
+						red.add(roption);
+						const boption = document.createElement("option");
+						boption.text = teams[i].name;
+						boption.value = teams[i].name;
+						blue.add(boption);
+					}
 				}
 			</script>
 		</div>
