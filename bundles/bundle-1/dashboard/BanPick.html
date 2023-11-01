@@ -2,11 +2,17 @@
 <html lang="jp">
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="stylesheet" href="./Map.css">
+		<link rel="stylesheet" href="./BanPick.css">
 	</head>
 	<body>
 		<div id="root">
+            <p>配信に表示する</p>
+            <div class="toggle_button">
+                <input id="toggle" class="toggle_input" type='checkbox' onclick="ChangeState(this.checked)">
+                <label for="toggle" class="toggle_label">
+            </div>
             <input type="button" value="AllReset" onclick="AllReset()"></input>
+            <input type="button" value="TypeUpdate" onclick="TypeUpdate()"></input>
             <p>1st</p>
             <select id="type1" class="mapselect">
                 <option>RedBAN</option>
@@ -14,17 +20,17 @@
                 <option>BlueBAN</option>
                 <option>BluePICK</option>
             </select>
-			<select id="maps1" class="mapselect">
+			<select name="maps" id="maps1" class="mapselect" onchange="change1()">
                 <option value="none">none</option>
             </select>
             <p>2nd</p>
-            <select name="maps" id="type2" class="mapselect">
+            <select id="type2" class="mapselect">
                 <option>RedBAN</option>
                 <option>RedPICK</option>
                 <option>BlueBAN</option>
                 <option>BluePICK</option>
             </select>
-			<select name="maps" id="maps2" class="mapselect">
+			<select name="maps" id="maps2" class="mapselect" onchange="change2()">
                 <option value="none">none</option>
             </select>
             <p>3rd</p>
@@ -34,7 +40,7 @@
                 <option>BlueBAN</option>
                 <option>BluePICK</option>
             </select>
-			<select name="maps" id="maps3" class="mapselect">
+			<select name="maps" id="maps3" class="mapselect" onchange="change3()">
                 <option value="none">none</option>
             </select>
             <p>4th</p>
@@ -44,7 +50,7 @@
                 <option>BlueBAN</option>
                 <option>BluePICK</option>
             </select>
-			<select name="maps" id="maps4" class="mapselect">
+			<select name="maps" id="maps4" class="mapselect" onchange="change4()">
                 <option value="none">none</option>
             </select>
             <p>5th</p>
@@ -53,21 +59,17 @@
                 <option>RedPICK</option>
                 <option>BlueBAN</option>
                 <option>BluePICK</option>
+                <option>Final</option>
             </select>
-			<select name="maps" id="maps5" class="mapselect">
+			<select name="maps" id="maps5" class="mapselect" onchange="change5()">
                 <option value="none">none</option>
             </select>
 		</div>
 	</body>
 	<script>
 		const api_url = nodecg.bundleConfig.mapapi; //生成したAPIのURLを指定
-        let value = {
-            1st: {
-                name: none,
-                index: 0
-            } ,
-            
-        }
+        let value
+        let type
 
 		const maps = []
 		fetch(api_url)
@@ -80,19 +82,180 @@
 				maps.push(json[i])
 			}
 		})
-		.then(function(){addmaps()})
+		.then(function(){
+            addmaps()
+            ChangeMap()
+        })
 
 		function addmaps(){
-            const selects = getElementsbyName("maps")
+            const selects = document.getElementsByName("maps")
             for (const i in selects){
-                for(const i in maps) {
-                    const target = selects[i]
+                const target = selects[i]
+                if (target.tagName !== "SELECT") continue
+                for(const j in maps) {
                     const option = document.createElement("option")
-                    option.text = maps[i].name
-                    option.value = maps[i].name
+                    option.text = maps[j].name
+                    option.value = maps[j].name
                     target.add(option)
                 }
             }
 		}
+
+        function AllReset(){
+            value = {
+                state: false,
+                first: {
+                    name: "none",
+                    index: 0
+                } ,
+                second: {
+                    name: "none",
+                    index: 0
+                } ,
+                third: {
+                    name: "none",
+                    index: 0
+                } ,
+                fourth: {
+                    name: "none",
+                    index: 0
+                } ,
+                fifth: {
+                    name: "none",
+                    index: 0
+                }
+            }
+
+            const BanPickRep = nodecg.Replicant('banpick')
+            BanPickRep.value = value
+        }
+
+        nodecg.Replicant('banpick').on('change', (newVal) => {
+            value = newVal
+            const target = document.getElementById("toggle")
+            target.checked = newVal.state
+            if (document.getElementById("maps1").options.length > 1) ChangeMap()
+        })
+
+        function ChangeMap(){
+            let target = document.getElementById("maps1")
+            target.options[value.first.index].selected = true
+            target = document.getElementById("maps2")
+            target.options[value.second.index].selected = true
+            target = document.getElementById("maps3")
+            target.options[value.third.index].selected = true
+            target = document.getElementById("maps4")
+            target.options[value.fourth.index].selected = true
+            target = document.getElementById("maps5")
+            target.options[value.fifth.index].selected = true
+        }
+
+        nodecg.Replicant('banpicktype').on('change', (newVal) => {
+            type = newVal
+            let target = document.getElementById("type1")
+            target.options[newVal.first.index].selected = true
+            target = document.getElementById("type2")
+            target.options[newVal.second.index].selected = true
+            target = document.getElementById("type3")
+            target.options[newVal.third.index].selected = true
+            target = document.getElementById("type4")
+            target.options[newVal.fourth.index].selected = true
+            target = document.getElementById("type5")
+            target.options[newVal.fifth.index].selected = true
+        })
+
+        function change1(){
+            const select = document.getElementById("maps1")
+            const index = select.selectedIndex
+            const selectmap = select.options[index].value
+
+            value.first.name = selectmap
+            value.first.index = index
+
+            const BanPickRep = nodecg.Replicant('banpick')
+            BanPickRep.value = value
+        }
+
+        function change2(){
+            const select = document.getElementById("maps2")
+            const index = select.selectedIndex
+            const selectmap = select.options[index].value
+
+            value.second.name = selectmap
+            value.second.index = index
+
+            const BanPickRep = nodecg.Replicant('banpick')
+            BanPickRep.value = value
+        }
+
+        function change3(){
+            const select = document.getElementById("maps3")
+            const index = select.selectedIndex
+            const selectmap = select.options[index].value
+
+            value.third.name = selectmap
+            value.third.index = index
+
+            const BanPickRep = nodecg.Replicant('banpick')
+            BanPickRep.value = value
+        }
+
+        function change4(){
+            const select = document.getElementById("maps4")
+            const index = select.selectedIndex
+            const selectmap = select.options[index].value
+
+            value.fourth.name = selectmap
+            value.fourth.index = index
+
+            const BanPickRep = nodecg.Replicant('banpick')
+            BanPickRep.value = value
+        }
+
+        function change5(){
+            const select = document.getElementById("maps5")
+            const index = select.selectedIndex
+            const selectmap = select.options[index].value
+
+            value.fifth.name = selectmap
+            value.fifth.index = index
+            const BanPickRep = nodecg.Replicant('banpick')
+            BanPickRep.value = value
+        }
+
+        function ChangeState(checked){
+            value.state = checked
+            const BanPickRep = nodecg.Replicant('banpick')
+            BanPickRep.value = value
+        }
+
+        function TypeUpdate(){
+            let select = document.getElementById("type1")
+            let index = select.selectedIndex
+            type.first.type = select.options[index].value
+            type.first.index = index
+
+            select = document.getElementById("type2")
+            index = select.selectedIndex
+            type.second.type = select.options[index].value
+            type.second.index = index
+
+            select = document.getElementById("type3")
+            index = select.selectedIndex
+            type.third.type = select.options[index].value
+            type.third.index = index
+
+            select = document.getElementById("type4")
+            index = select.selectedIndex
+            type.fourth.type = select.options[index].value
+            type.fourth.index = index
+
+            select = document.getElementById("type5")
+            index = select.selectedIndex
+            type.fifth.type = select.options[index].value
+            type.fifth.index = index
+            const BanPickRep = nodecg.Replicant('banpicktype')
+            BanPickRep.value = type
+        }
 	</script>
 </html>

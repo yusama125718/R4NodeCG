@@ -234,10 +234,59 @@ body {
 
 .banpick{
     position: absolute;
+    top: 0;
+    right: 0;
     width: 100vw;
     height: 100vh;
 }
 
+.banpick_container{
+    display: flex;
+    margin: 10vh 10vw 10vh 10vw;
+    height: 80%;
+    width: 80%;
+    background-color: black;
+    opacity: 0.5;
+}
+
 .maps{
+    border: solid;
+    border-color: rgb(100, 100, 100);
+    border-width: 5px;
     width: 20%;
+    height: 99%;
+}
+
+.mapimg{
+    height: 70%;
+    width: 100%;
+}
+
+.maptexts{
+    position: relative;
+    height: 15%;
+    width: 100%;    
+    margin: 0;
+}
+
+.mapname{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 100%;
+    width: 100%;
+    font-size: 30px;
+}
+
+.maptype{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 100%;
+    width: 100%;
+    font-size: 30px;
 }

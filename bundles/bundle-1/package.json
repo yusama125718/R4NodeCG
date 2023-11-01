@@ -53,14 +53,14 @@
         "name": "RedAbility",
         "title": "RedAbilityEdit",
         "width": 3,
-        "file": "RedAbility.html",
+        "file": "RedAbilityEdit.html",
         "headerColor": "#525F78"
       },
       {
         "name": "BlueAbility",
         "title": "BlueAbilityEdit",
         "width": 3,
-        "file": "BlueAbility.html",
+        "file": "BlueAbilityEdit.html",
         "headerColor": "#525F78"
       },
       {
