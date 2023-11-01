@@ -73,3 +73,11 @@ nodecg.Replicant('redAbility').on('change', (newVal) => {
         red.appendChild(img)
     }
 })
+
+nodecg.Replicant('banpick').on('change', (newVal) => {
+    if (newVal.state){
+        $("#banpick").show(2000)
+    }else {
+        $("#banpick").hide(2000)
+    }
+})

@@ -231,3 +231,13 @@ body {
     border-right: 10px solid transparent;
     border-bottom: 14px solid darkslategray; 
 }
+
+.banpick{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+.maps{
+    width: 20%;
+}

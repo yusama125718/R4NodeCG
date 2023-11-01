@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="./Map.css">
+	</head>
+	<body>
+		<div id="root">
+			<h1>maps</h1>
+			<select name="maps" id="maps" class="mapselect"></select>
+            <input type="button" value="Set" onclick="SetMap()"></input>
+            <br>
+            <p>ランダムボタン(通知に出るだけでsetはされません)</p>
+            <input type="button" value="RandomSet" onclick="Random()"></input>
+		</div>
+	</body>
+	<script>
+		var api_url = nodecg.bundleConfig.mapapi; //生成したAPIのURLを指定
+
+		const maps = []
+		fetch(api_url)
+		.then(function (fetch_data) {
+			return fetch_data.json()
+		})
+		.then(function (json) {
+			for (const i in json) {
+				if (json[i] == null) continue;
+				maps.push(json[i])
+			}
+		})
+		.then(function(){addmaps()})
+
+		function SetMap(){
+			const target = document.getElementById("maps");
+			const tnum = target.selectedIndex;
+			const tname = target.options[tnum].value;
+
+			let map = null
+			for (const i in maps){
+				if (maps[i].name == tname) {
+					map = {name: maps[i].name}
+					break
+				}
+			}
+
+			const MapRep = nodecg.Replicant('map')
+			MapRep.value = map
+		}
+
+		function Random(){
+			if (maps.length == 0) {
+				alert("しばらくお待ちください。")
+				return
+			}
+			const rand = Math.floor(Math.random() * maps.length)
+			alert(maps[rand].name)
+		}
+
+		function addmaps(){
+			for(const i in maps) {
+				const target = document.getElementById("maps");
+				const option = document.createElement("option");
+				option.text = maps[i].name;
+				option.value = maps[i].name;
+				target.add(option);
+			}
+		}
+	</script>
+</html>

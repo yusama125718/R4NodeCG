@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="./Map.css">
+	</head>
+	<body>
+		<div id="root">
+            <input type="button" value="AllReset" onclick="AllReset()"></input>
+            <p>1st</p>
+            <select id="type1" class="mapselect">
+                <option>RedBAN</option>
+                <option>RedPICK</option>
+                <option>BlueBAN</option>
+                <option>BluePICK</option>
+            </select>
+			<select id="maps1" class="mapselect">
+                <option value="none">none</option>
+            </select>
+            <p>2nd</p>
+            <select name="maps" id="type2" class="mapselect">
+                <option>RedBAN</option>
+                <option>RedPICK</option>
+                <option>BlueBAN</option>
+                <option>BluePICK</option>
+            </select>
+			<select name="maps" id="maps2" class="mapselect">
+                <option value="none">none</option>
+            </select>
+            <p>3rd</p>
+            <select id="type3" class="mapselect">
+                <option>RedBAN</option>
+                <option>RedPICK</option>
+                <option>BlueBAN</option>
+                <option>BluePICK</option>
+            </select>
+			<select name="maps" id="maps3" class="mapselect">
+                <option value="none">none</option>
+            </select>
+            <p>4th</p>
+            <select id="type4" class="mapselect">
+                <option>RedBAN</option>
+                <option>RedPICK</option>
+                <option>BlueBAN</option>
+                <option>BluePICK</option>
+            </select>
+			<select name="maps" id="maps4" class="mapselect">
+                <option value="none">none</option>
+            </select>
+            <p>5th</p>
+            <select id="type5" class="mapselect">
+                <option>RedBAN</option>
+                <option>RedPICK</option>
+                <option>BlueBAN</option>
+                <option>BluePICK</option>
+            </select>
+			<select name="maps" id="maps5" class="mapselect">
+                <option value="none">none</option>
+            </select>
+		</div>
+	</body>
+	<script>
+		const api_url = nodecg.bundleConfig.mapapi; //生成したAPIのURLを指定
+        let value = {
+            1st: {
+                name: none,
+                index: 0
+            } ,
+            
+        }
+
+		const maps = []
+		fetch(api_url)
+		.then(function (fetch_data) {
+			return fetch_data.json()
+		})
+		.then(function (json) {
+			for (const i in json) {
+				if (json[i] == null) continue;
+				maps.push(json[i])
+			}
+		})
+		.then(function(){addmaps()})
+
+		function addmaps(){
+            const selects = getElementsbyName("maps")
+            for (const i in selects){
+                for(const i in maps) {
+                    const target = selects[i]
+                    const option = document.createElement("option")
+                    option.text = maps[i].name
+                    option.value = maps[i].name
+                    target.add(option)
+                }
+            }
+		}
+	</script>
+</html>

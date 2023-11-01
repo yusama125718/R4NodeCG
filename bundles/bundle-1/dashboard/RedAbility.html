@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="jp">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="./RedAbility.css">
+	</head>
+	<body>
+		<div id="root">
+            <h1>RedAbilityEdit</h1>
+			<h2>Red</h2>
+			<div id="Red"></div>
+		</div>
+	</body>
+	<script>
+		const api_url = nodecg.bundleConfig.abilityapi
+		const abilitys = []
+		let html = null
+
+		fetch(api_url)
+		.then(function(fetch_data) {
+			return fetch_data.json()
+		})
+		.then(function (json) {
+			const select = document.createElement("select")
+			for (const i in json) {
+				if (json[i] == null) continue;
+				abilitys.push(json[i])
+				const option = document.createElement("option");
+				option.text = json[i].name;
+				option.value = json[i].name;
+				select.add(option);
+			}
+			html = select
+		})
+		.then(function (){
+			const newVal = nodecg.Replicant('redteam').value
+			const red = document.getElementById("Red")
+			while(red.lastChild){
+				red.removeChild(red.lastChild);
+			}
+			
+			for (const i in newVal.players){
+				if (newVal.players[i] == "") continue
+				const p = document.createElement("p")
+				p.appendChild(document.createTextNode(newVal.players[i]))
+				red.appendChild(p)
+				const select = html.cloneNode(true)
+				select.id = i
+				red.appendChild(select)
+			}
+
+			const button = document.createElement("input")
+            button.type = "button"
+            button.value = "sum and push"
+            button.addEventListener("click", SaveData)
+            red.appendChild(button)
+		})
+
+		nodecg.Replicant('redteam').on('change', (newVal) => {
+			if (html == null) return
+			const red = document.getElementById("Red")
+			while (red.firstChild) red.removeChild(red.firstChild);
+			
+			for (const i in newVal.players){
+				if (newVal.players[i] == "") continue
+				const p = document.createElement("p")
+				p.appendChild(document.createTextNode(newVal.players[i]))
+				red.appendChild(p)
+				const select = html.cloneNode(true)
+				select.id = i
+				red.appendChild(select)
+			}
+
+			const button = document.createElement("input")
+            button.type = "button"
+            button.value = "sum and push"
+            button.addEventListener("click", SaveData)
+            red.appendChild(button)
+		})
+
+		function SaveData(){
+			const select = document.getElementsByTagName("select")
+			const players = []
+			const pushval = []
+			let cost = 0
+
+			for (const i in select){
+                if (select[i].selectedIndex === undefined) continue
+				players.push(select[i].options[select[i].selectedIndex].value)
+			}
+
+			for (const i in players){
+				for (const j in abilitys){
+					if (abilitys[j].name == players[i]) {
+                        pushval.push(abilitys[j].img)
+                        cost += abilitys[j].cost
+                    }
+				}
+			}
+
+			const value = {
+				abilitys : pushval,
+				cost : cost
+			}
+
+			const Rep = nodecg.Replicant('redAbility');
+			Rep.value = value;
+
+			alert("Redチームのコスト合計は" + cost + "です")
+		}
+	</script>
+</html>

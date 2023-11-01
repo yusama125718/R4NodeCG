@@ -22,45 +22,52 @@
     "compatibleRange": "^2.0.0",
     "dashboardPanels": [
       {
-        "name": "panel-1",
+        "name": "Team",
         "title": "TeamSettings",
         "width": 3,
-        "file": "panel-1.html",
+        "file": "Team.html",
         "headerColor": "#525F78"
       },
       {
-        "name": "panel-2",
+        "name": "TeamEdit",
         "title": "TeamEdit",
         "width": 3,
-        "file": "panel-2.html",
+        "file": "TeamEdit.html",
         "headerColor": "#525F78"
       },
       {
-        "name": "panel-3",
+        "name": "Map",
         "title": "MapEdit",
         "width": 3,
-        "file": "panel-3.html",
+        "file": "Map.html",
         "headerColor": "#525F78"
       },
       {
-        "name": "panel-4",
+        "name": "Score",
         "title": "ScoreEdit",
         "width": 3,
-        "file": "panel-4.html",
+        "file": "Score.html",
         "headerColor": "#525F78"
       },
       {
-        "name": "panel-5",
+        "name": "RedAbility",
         "title": "RedAbilityEdit",
         "width": 3,
-        "file": "panel-5.html",
+        "file": "RedAbility.html",
         "headerColor": "#525F78"
       },
       {
-        "name": "panel-6",
+        "name": "BlueAbility",
         "title": "BlueAbilityEdit",
         "width": 3,
-        "file": "panel-6.html",
+        "file": "BlueAbility.html",
+        "headerColor": "#525F78"
+      },
+      {
+        "name": "BanPick",
+        "title": "BanPick",
+        "width": 3,
+        "file": "BanPick.html",
         "headerColor": "#525F78"
       }
     ],
