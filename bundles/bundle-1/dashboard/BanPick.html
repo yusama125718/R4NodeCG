@@ -106,23 +106,28 @@
                 state: false,
                 first: {
                     name: "none",
-                    index: 0
+                    index: 0,
+                    img: "" 
                 } ,
                 second: {
                     name: "none",
-                    index: 0
+                    index: 0,
+                    img: "" 
                 } ,
                 third: {
                     name: "none",
-                    index: 0
+                    index: 0,
+                    img: "" 
                 } ,
                 fourth: {
                     name: "none",
-                    index: 0
+                    index: 0,
+                    img: "" 
                 } ,
                 fifth: {
                     name: "none",
-                    index: 0
+                    index: 0,
+                    img: "" 
                 }
             }
 
@@ -168,9 +173,15 @@
             const select = document.getElementById("maps1")
             const index = select.selectedIndex
             const selectmap = select.options[index].value
+            let img = ""
+
+            for (const i in maps){
+                if (maps[i].name === selectmap) img = maps[i].img 
+            }
 
             value.first.name = selectmap
             value.first.index = index
+            value.first.img = img
 
             const BanPickRep = nodecg.Replicant('banpick')
             BanPickRep.value = value
@@ -180,9 +191,15 @@
             const select = document.getElementById("maps2")
             const index = select.selectedIndex
             const selectmap = select.options[index].value
+            let img = ""
+
+            for (const i in maps){
+                if (maps[i].name === selectmap) img = maps[i].img 
+            }
 
             value.second.name = selectmap
             value.second.index = index
+            value.second.img = img
 
             const BanPickRep = nodecg.Replicant('banpick')
             BanPickRep.value = value
@@ -192,9 +209,15 @@
             const select = document.getElementById("maps3")
             const index = select.selectedIndex
             const selectmap = select.options[index].value
+            let img = ""
+
+            for (const i in maps){
+                if (maps[i].name === selectmap) img = maps[i].img 
+            }
 
             value.third.name = selectmap
             value.third.index = index
+            value.third.img = img
 
             const BanPickRep = nodecg.Replicant('banpick')
             BanPickRep.value = value
@@ -204,9 +227,15 @@
             const select = document.getElementById("maps4")
             const index = select.selectedIndex
             const selectmap = select.options[index].value
+            let img = ""
+
+            for (const i in maps){
+                if (maps[i].name === selectmap) img = maps[i].img 
+            }
 
             value.fourth.name = selectmap
             value.fourth.index = index
+            value.fourth.img = img
 
             const BanPickRep = nodecg.Replicant('banpick')
             BanPickRep.value = value
@@ -216,9 +245,16 @@
             const select = document.getElementById("maps5")
             const index = select.selectedIndex
             const selectmap = select.options[index].value
+            let img = ""
+
+            for (const i in maps){
+                if (maps[i].name === selectmap) img = maps[i].img 
+            }
 
             value.fifth.name = selectmap
             value.fifth.index = index
+            value.fifth.img = img
+
             const BanPickRep = nodecg.Replicant('banpick')
             BanPickRep.value = value
         }

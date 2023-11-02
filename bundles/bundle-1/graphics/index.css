@@ -250,16 +250,28 @@ body {
 }
 
 .maps{
+    position: relative;
     border: solid;
     border-color: rgb(100, 100, 100);
     border-width: 5px;
     width: 20%;
     height: 99%;
+    opacity: 1;
 }
 
 .mapimg{
     height: 70%;
     width: 100%;
+    z-index: 1;
+}
+
+.mapbanned{
+    position: absolute;
+    z-index: 2;
+    height: 70%;
+    width: 100%;
+    top: 0;
+    right: 0;
 }
 
 .maptexts{

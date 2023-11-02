@@ -1,0 +1,14 @@
+/assets
+/build
+/cfg
+/db
+/logs
+/node_modules
+/schemas
+/scripts
+/AUTHORS
+/index.js
+/LICENSE
+/package-lock.json
+/package.json
+/README.md

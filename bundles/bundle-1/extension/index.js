@@ -3,23 +3,28 @@ module.exports = function (nodecg) {
 		state: false,
 		first: {
 			name: "none",
-			index: 0
+			index: 0,
+			img: ""
 		} ,
 		second: {
 			name: "none",
-			index: 0
+			index: 0,
+			img: ""
 		} ,
 		third: {
 			name: "none",
-			index: 0
+			index: 0,
+			img: ""
 		} ,
 		fourth: {
 			name: "none",
-			index: 0
+			index: 0,
+			img: ""
 		} ,
 		fifth: {
 			name: "none",
-			index: 0
+			index: 0,
+			img: ""
 		}
 	}
 
