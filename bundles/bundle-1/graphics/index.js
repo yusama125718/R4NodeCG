@@ -51,8 +51,8 @@ nodecg.Replicant('blueAbility').on('change', (newVal) => {
     for (const i in newVal.abilitys){
         const img = document.createElement("img")
         img.src = newVal.abilitys[i]
-        img.width = 35
-        img.height = 56
+        img.width = 50
+        img.height = 68
         img.className = "blueimg"
         blue.appendChild(img)
     }
@@ -70,8 +70,8 @@ nodecg.Replicant('redAbility').on('change', (newVal) => {
     for (const i in newVal.abilitys){
         const img = document.createElement("img")
         img.src = newVal.abilitys[i]
-        img.width = 35
-        img.height = 56
+        img.width = 50
+        img.height = 68
         img.className = "redimg"
         red.appendChild(img)
     }
@@ -81,22 +81,37 @@ nodecg.Replicant('banpick').on('change', (newVal) => {
     if (newVal.first.name !== "none"){
         document.getElementById("map1name").innerText = newVal.first.name
         document.getElementById("map1img").src = newVal.first.img
+    } else {
+        document.getElementById("map1name").innerText = ""
+        document.getElementById("map1img").src = ""
     }
     if (newVal.second.name !== "none"){
         document.getElementById("map2name").innerText = newVal.second.name
         document.getElementById("map2img").src = newVal.second.img
+    } else {
+        document.getElementById("map2name").innerText = ""
+        document.getElementById("map2img").src = ""
     }
     if (newVal.third.name !== "none"){
         document.getElementById("map3name").innerText = newVal.third.name
         document.getElementById("map3img").src = newVal.third.img
+    } else {
+        document.getElementById("map3name").innerText = ""
+        document.getElementById("map3img").src = ""
     }
     if (newVal.fourth.name !== "none"){
         document.getElementById("map4name").innerText = newVal.fourth.name
         document.getElementById("map4img").src = newVal.fourth.img
+    } else {
+        document.getElementById("map4name").innerText = ""
+        document.getElementById("map4img").src = ""
     }
     if (newVal.fifth.name !== "none"){
         document.getElementById("map5name").innerText = newVal.fifth.name
         document.getElementById("map5img").src = newVal.fifth.img
+    } else {
+        document.getElementById("map5name").innerText = ""
+        document.getElementById("map5img").src = ""
     }
     if (newVal.state){
         $("#banpick").show(2000)
